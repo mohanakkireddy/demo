@@ -1,12 +1,12 @@
-package com.example.demo.student;
+package com.example.demo.student.controller;
 
-import com.example.demo.ProgrammaticallyValidatingService;
+import com.example.demo.student.service.ProgrammaticallyValidatingService;
+import com.example.demo.student.service.StudentService;
 import com.example.demo.student.dto.Customer;
 import com.example.demo.student.dto.Violation;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.student.model.Student;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -50,6 +50,12 @@ public class StudentController {
         return programmaticallyValidatingService.validateInputWithInjectedValidator(customer);
 
     }
+    @PutMapping("/update/{studentId}")
+    public void editStudent(@PathVariable("studentId") Long studentId, @RequestBody Student student){
+        studentService.editStudent(student, studentId);
+
+    }
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.student.service;
 
 import com.example.demo.student.dto.Customer;
 import com.example.demo.student.dto.Violation;

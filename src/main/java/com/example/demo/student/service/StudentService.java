@@ -1,5 +1,7 @@
-package com.example.demo.student;
+package com.example.demo.student.service;
 
+import com.example.demo.student.model.Student;
+import com.example.demo.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +53,7 @@ public class StudentService {
         if (name!= null && name.length()> 0 &&
         !Objects.equals(student.getName(), name)){
             student.setName(name);
+
         }
         if (email!= null && email.length()> 0 &&
                 !Objects.equals(student.getEmail(), email)){
@@ -60,6 +63,18 @@ public class StudentService {
             }
             student.setEmail(email);
         }
+        studentRepository.save(student);
+
+
+    }
+
+    public void editStudent(Student student, Long studentId) {
+        Student studentsearch = studentRepository.findById(studentId).orElseThrow(()-> new IllegalStateException("student with id"+ studentId+"does not exists"));
+
+        studentsearch.setName(student.getName());
+        studentsearch.setEmail(student.getEmail());
+
+        studentRepository.save(studentsearch);
 
     }
 }
